@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Aug  7 18:32:29 2020
-
-@author: vsevolod
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,7 +23,7 @@ def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   num_group = len(list_group_name)
   num_data = len(data)
   if num_group != num_data:
-   raise RuntimeError('Список имен групп и длина списка данных не соответствуют!')
+   raise RuntimeError('Group name list and data list length do not match!')
   
   ff = h5.File(fs.join(PathToSave, SavedFileName), 'w')
   for i, group in enumerate(list_group_name):
@@ -53,31 +48,15 @@ def pca_result(activations, n_comp, n_jobs = 32):
 """
 Plot Latent Space
 """  
-
 from sklearn.decomposition import PCA  
 
-
-RootPathToLatentSpace = '/home/vsevolod/Desktop/Dymas/LatentSpace'
+RootPathToLatentSpace = ''
     
-NamesDataSet = ['FreeColor.hdf5',\
-                'FreeColorAndH.hdf5',\
-                'FreeColorAndX.hdf5',\
-                'FreeColorAndHL.hdf5',\
-                'FreeColorAndXY.hdf5',\
-                'FreeAll.hdf5']
-
-PathToModel = '/home/vsevolod/Desktop/Dymas/Models'
-NameModel = ['model_ezConvAutoEncoderForMnist_dice_loss.hdf5',\
-             'model_DymasUnetСircumcised_dice_loss.hdf5',\
-              'model_DymasUnetWithSeparableConvСircumcised_dice_loss.hdf5']
-
-NNName = ['MNIST', 'DU', 'DUS']
-DataName = ['FreeColor',\
-            'FreeColorAndH',\
-              'FreeColorAndX',\
-              'FreeColorAndHL',\
-              'FreeColorAndXY',\
-              'FreeAll']
+NamesDataSet = ['']
+PathToModel = ''
+NameModel = ['']
+NNName = ['']
+DataName = ['']
 #Umap2D
 for i, model in enumerate(NameModel):
   NameFile = 'latent_space_%s_%s'%(model, NamesDataSet[-1])
@@ -114,22 +93,14 @@ for i, model in enumerate(NameModel):
     #saveHDF5file(fs.join(RootPathToLatentSpace, 'Unet2D'), '%s_%s.hdf5'%(model[:-5], data[:-5]), ['ls_umap'], [latent_space_3d])
 """
 #%%
-RootPathToLatentSpace = '/data/vsevolod/DmiDiplom/LatentSpace3p'
+RootPathToLatentSpace = ''
     
-NamesDataSet = ['OnlyColor.hdf5',\
-                'OnlyH.hdf5',\
-                'OnlyX.hdf5']
+NamesDataSet = ['']
+PathToModel = ''
+NameModel = ['']
 
-  
-PathToModel = '/data/vsevolod/DmiDiplom/Models'
-NameModel = ['model_ezConvAutoEncoderForMnist_dice_loss.hdf5',\
-             'model_DymasUnetСircumcised_dice_loss.hdf5',\
-              'model_DymasUnetWithSeparableConvСircumcised_dice_loss.hdf5']
-
-NNName = ['MNIST', 'DU', 'DUS']
-DataName = ['OnlyColor',\
-                'OnlyH',\
-                'OnlyX']
+NNName = ['']
+DataName = ['']
 
 for i, model in enumerate(NameModel):
   NameFile = 'latent_space_%s_%s'%(model, NamesDataSet[-1])
