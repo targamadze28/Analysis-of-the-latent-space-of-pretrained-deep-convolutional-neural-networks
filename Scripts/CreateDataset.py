@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 import numpy as np
-import h5py as h5
-
 import matplotlib.pyplot as plt
-
+import h5py as h5
 import cv2 as cv 
-
 import os.path as fs
-#%%
 
+#%%
 def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   num_group = len(list_group_name)
   num_data = len(data)
@@ -32,6 +28,7 @@ def readHDF5file(PathToSave, SavedFileName, list_group_name):
   ff.close()
   return data
 
+#%%
 def selection_bias(x_center, y_center, l, h):
   selection = True
   if x_center + l > 64:
@@ -43,7 +40,6 @@ def selection_bias(x_center, y_center, l, h):
   if y_center - h < 0:
     selection = False
   return selection
-
 #%%
 """ 
 The input data is a 64x64x3 RGB image containing three colored rectangles.
@@ -62,7 +58,7 @@ def create_dataset(num_samples, images_size, delta, perm = []):
     if sample % 1000 == 0:
       print(sample, ' / ', num_samples)
     
-    #perm = np.random.permutation(3)
+    perm = np.random.permutation(3)
     
     center_1 = 42
     center_2 = 127 
@@ -152,7 +148,7 @@ NameDataSetFile = ''
 
 num_samples = 100
 images_size = 64
-delta = 15 # длина диапазона
+delta = 15 # lenght color range
 
 images, mask, parameters, full_mask = create_dataset(num_samples, images_size, delta, [0])
 #images_1, mask_1, parameters_1, full_mask_1 = create_dataset(num_samples, images_size, delta, [0])
@@ -173,4 +169,4 @@ full_mask[:, :, :, -1] = 1 - full_mask[:, :, :, -1]
 saveHDF5file(PathToSave, NameDataSetFile, ['image', 'mask', 'parameters', 'full_mask'],\
              [images, mask, parameters, full_mask])
 
-#data = readHDF5file(PathToSave, 'FreeColorAndH.hdf5', ['image', 'mask']
+#data = readHDF5file(PathToSave, NameDataSetFile, ['image', 'mask']
