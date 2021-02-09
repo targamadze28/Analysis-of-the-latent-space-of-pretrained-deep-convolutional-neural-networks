@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jul 13 23:54:53 2020
 
-@author: vsevolod
-"""
 
 import numpy as np
 import h5py as h5
@@ -20,7 +16,7 @@ def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   num_group = len(list_group_name)
   num_data = len(data)
   if num_group != num_data:
-   raise RuntimeError('Список имен групп и длина списка данных не соответствуют!')
+   raise RuntimeError('Group name list and data list length do not match!')
   
   ff = h5.File(fs.join(PathToSave, SavedFileName), 'w')
   for i, group in enumerate(list_group_name):
@@ -151,37 +147,30 @@ def create_dataset(num_samples, images_size, delta, perm = []):
         
   return images, np.concatenate((mask, mask_background[:, :, :, :1]), axis = -1), parameters, full_mask
   
-PathToSave = '/home/vsevolod/Desktop/Dymas/DataSets'
-NameDataSetFile = 'OnlyColor.hdf5'
+PathToSave = ''
+NameDataSetFile = ''
 
 num_samples = 100
 images_size = 64
 delta = 15 # длина диапазона
 
-#images, mask, parameters, full_mask = create_dataset(num_samples, images_size, delta, [0])
+images, mask, parameters, full_mask = create_dataset(num_samples, images_size, delta, [0])
+#images_1, mask_1, parameters_1, full_mask_1 = create_dataset(num_samples, images_size, delta, [0])
+#images_2, mask_2, parameters_2, full_mask_2 = create_dataset(num_samples, images_size, delta, [1])
+#images_3, mask_3, parameters_3, full_mask_3 = create_dataset(num_samples, images_size, delta, [2])
 
-images_1, mask_1, parameters_1, full_mask_1 = create_dataset(num_samples, images_size, delta, [0])
-images_2, mask_2, parameters_2, full_mask_2 = create_dataset(num_samples, images_size, delta, [1])
-images_3, mask_3, parameters_3, full_mask_3 = create_dataset(num_samples, images_size, delta, [2])
-
-images = np.concatenate((images_1, images_2, images_3))
-mask = np.concatenate((mask_1, mask_2, mask_1))
-parameters = np.concatenate((parameters_1, parameters_2, parameters_3))
-full_mask = np.concatenate((full_mask_1, full_mask_2, full_mask_3))
+#images = np.concatenate((images_1, images_2, images_3))
+#mask = np.concatenate((mask_1, mask_2, mask_1))
+#parameters = np.concatenate((parameters_1, parameters_2, parameters_3))
+#full_mask = np.concatenate((full_mask_1, full_mask_2, full_mask_3))
 
 
 mask[:, :, :, -1] = 1 - mask[:, :, :, -1]
 full_mask[:, :, :, -1] = 1 - full_mask[:, :, :, -1]
 
-print(np.max(images[5]))
-
-#saveHDF5file(PathToSave, NameDataSetFile, ['image', 'mask', 'parameters', 'full_mask'],\
-#             [images, mask, parameters, full_mask])
-
-#data = readHDF5file(PathToSave, 'FreeColorAndH.hdf5', ['image', 'mask'])
-#images = data[0]
 
 
+saveHDF5file(PathToSave, NameDataSetFile, ['image', 'mask', 'parameters', 'full_mask'],\
+             [images, mask, parameters, full_mask])
 
-
-
+#data = readHDF5file(PathToSave, 'FreeColorAndH.hdf5', ['image', 'mask']
