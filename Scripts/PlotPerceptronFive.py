@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 22 01:39:52 2020
-
-@author: vsevolod
-"""
 
 import numpy as np
 import h5py as h5
@@ -23,7 +18,7 @@ def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   num_group = len(list_group_name)
   num_data = len(data)
   if num_group != num_data:
-   raise RuntimeError('Список имен групп и длина списка данных не соответствуют!')
+   raise RuntimeError('Group name list and data list length do not match!')
   
   ff = h5.File(fs.join(PathToSave, SavedFileName), 'w')
   for i, group in enumerate(list_group_name):
@@ -61,13 +56,13 @@ def plotDependenceAccuracy4Compress(dims, data, title = '', saveplot = True,\
     plt.savefig(fs.join(Path2Save, NamePic))
   return None
 #%%
-RootPath = '/home/vsevolod/Desktop/Dymas/LatentSpace2T'
-Path2PerceptronData = fs.join(RootPath, 'perceptron')
-NameFile = 'perceptron_ModelezConvAutoEncoderForMnist_Lossdice_loss_Launch1_DataOnlyColor_Layer6.hdf5'
+RootPath = ''
+Path2PerceptronData = fs.join(RootPath, '')
+NameFile = ''
 
 data = readHDF5file(Path2PerceptronData, NameFile, ['precision'])[0]
 
-umap_shape_mnist = [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
+umap_shape_mnist = []
 
 plt.figure(figsize = (16, 10))
 plt.plot(umap_shape_mnist, data[:, 0, 0], label = 'class 1', \
@@ -98,22 +93,17 @@ plotDependenceAccuracy4Compress(umap_shape_mnist, data[:, 1, :])
 """
 NN1 ezConvAutoEncoder4Mnist
 """
-RootPath = '/home/vsevolod/Desktop/Dymas/LatentSpace2T'
+RootPath = ''
 Path2PerceptronData = fs.join(RootPath, 'perceptron')
 
-NamesDataSet = ['OnlyColor.hdf5',\
-                'OnlyH.hdf5',\
-                'OnlyX.hdf5',\
-                'Only.hdf5']
+NamesDataSet = ['']
       
-name_loss_list = ['weighted_categorical_crossentropy',\
-             'dice_loss']
+name_loss_list = ['']
   
-name_NN_list = ['ezConvAutoEncoderForMnist', 'DymasUnetСircumcised',\
-             'DymasUnetWithSeparableConvСircumcised']
+name_NN_list = ['']
 
-num_layers = [6, 7]
-umap_shape_mnist = [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
+num_layers = []
+umap_shape_mnist = []
 
 iter_NN = 0
 for iter_loss in range(1):#range(len(name_loss_list)):
@@ -146,22 +136,17 @@ for iter_loss in range(1):#range(len(name_loss_list)):
 """
 NN2 ezConvAutoEncoder4Mnist
 """
-RootPath = '/home/vsevolod/Desktop/Dymas/LatentSpace2T'
-Path2PerceptronData = fs.join(RootPath, 'perceptron2')
+RootPath = ''
+Path2PerceptronData = fs.join(RootPath, '')
 
-NamesDataSet = ['OnlyColor.hdf5',\
-                'OnlyH.hdf5',\
-                'OnlyX.hdf5',\
-                'Only.hdf5']
+NamesDataSet = ['']
       
-name_loss_list = ['weighted_categorical_crossentropy',\
-             'dice_loss']
+name_loss_list = ['']
   
-name_NN_list = ['ezConvAutoEncoderForMnist', 'DymasUnetСircumcised',\
-             'DymasUnetWithSeparableConvСircumcised']
+name_NN_list = ['']
 
-num_layers = [7, 8, 9, 10, 11, 12]
-umap_shape_mnist = [1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
+num_layers = []
+umap_shape_mnist = []
 
 iter_NN = 1
 for iter_loss in range(1):#range(len(name_loss_list)):
