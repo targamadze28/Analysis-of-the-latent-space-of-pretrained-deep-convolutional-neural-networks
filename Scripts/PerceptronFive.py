@@ -1,18 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 14 14:03:50 2020
 
-@author: vsevolod
-"""
-
-import h5py as h5
 import numpy as np
-
 import matplotlib.pyplot as plt
+import h5py as h5
 
 import os.path as fs
-import umap
 
 import keras
 from keras.models import Sequential
@@ -25,21 +18,14 @@ from sklearn.linear_model import Perceptron
 from sklearn.metrics import f1_score
 from scipy.spatial import distance
 from  sklearn.preprocessing import normalize
-
 from sklearn.metrics import accuracy_score
 
 import logging as logg
-
 from sklearn.decomposition import PCA
 from sklearn import preprocessing
+import umap
 
 #%%
-
-def read_file(file_path, file_name, folder_name):
-    with h5.File(fs.join(file_path, file_name), 'r') as f:
-        data = f[folder_name][...]
-    return data
-
 def readHDF5file(PathToSave, SavedFileName, list_group_name):
   data = []
   ff = h5.File(fs.join(PathToSave, SavedFileName), 'r')
@@ -52,7 +38,7 @@ def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   num_group = len(list_group_name)
   num_data = len(data)
   if num_group != num_data:
-   raise RuntimeError('Список имен групп и длина списка данных не соответствуют!')
+   raise RuntimeError('Group name list and data list length do not match!')
   
   ff = h5.File(fs.join(PathToSave, SavedFileName), 'w')
   for i, group in enumerate(list_group_name):
@@ -60,6 +46,7 @@ def saveHDF5file(PathToSave, SavedFileName, list_group_name, data):
   ff.close()
   return None
 
+#%%
 def pca_result(activations, n_comp):
   embedding = PCA(n_components= n_comp).fit_transform(activations)
   return embedding
@@ -68,12 +55,10 @@ def umap_result(activations, n_comp):
     embedding = umap.UMAP(n_components=n_comp).fit_transform(activations)
     return embedding
   
-#%%
-   
+#%%   
 def TrainPerceptron(latent_space):
   n = len(latent_space)
   shape_ls = latent_space.shape[1]
-  print(shape_ls)
   labels = np.empty((n, 1), dtype = np.int32)
   labels[:15000], labels[15000:30000], labels[30000:] = 0, 1, 2
   #labels[:5000], labels[5000:10000], labels[10000:] = 0, 1, 2
@@ -97,7 +82,7 @@ def TrainPerceptron(latent_space):
   return score
   
 #%%
-RootPathLatentSpace = '/data/vsevolod/DmiDiplom/LatentSpace2T/preceptron'
+RootPathLatentSpace = ''
 
 logg.basicConfig(filename=fs.join(RootPathLatentSpace, "LatentSpaceLogger.log"), level=logg.INFO)
 logg
@@ -105,26 +90,19 @@ logg
 umap_shape_mnist = [0, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
 umap_shape_unet = [0, 512, 256, 128, 64, 32, 16, 8, 4, 2]
 
-PathToDataSet = '/data/vsevolod/DmiDiplom/DataSets'
-PathToModel = '/data/vsevolod/DmiDiplom/Models/gridNN'
+PathToDataSet = ''
+PathToModel = ''
 
-NamesDataSet = ['OnlyColor.hdf5',\
-                'OnlyH.hdf5',\
-                'OnlyX.hdf5',\
-                'Only.hdf5']
-      
-name_loss_list = ['weighted_categorical_crossentropy',\
-             'dice_loss']
+NamesDataSet = ['']
+name_loss_list = ['']
   
-name_NN_list = ['ezConvAutoEncoderForMnist', 'DymasUnetСircumcised',\
-             'DymasUnetWithSeparableConvСircumcised']
-
-num_layers = [[6, 7], [7, 8, 9, 10, 11, 12], [7, 8, 9, 10, 11, 12, 13]]
+name_NN_list = ['']
+num_layers = [[], []]
 
 precision = np.ones((len(name_NN_list), len(name_loss_list), 5, len(NamesDataSet),\
                       7, 11, 2), dtype = np.float32)
 precision = precision*(-1.)
-print(precision)
+"""
 for iter_NN in range(len(name_NN_list)):
   for iter_loss in range(len(name_loss_list)):
     for launch_num in range(5):        
@@ -184,19 +162,20 @@ for iter_NN in range(len(name_NN_list)):
             ff = h5.File(fs.join(RootPathLatentSpace, 'preceptron', 'perceptron.hdf5'), 'w')
             ff.create_dataset('precision', precision)
             ff.close()
+"""
 #%%
 """
 NN1 
 """
-RootPathLatentSpace = '/data/vsevolod/DmiDiplom/LatentSpace2T/preceptron'
+RootPathLatentSpace = ''
 
 logg.basicConfig(filename=fs.join(RootPathLatentSpace, "LatentSpaceLogger.log"), level=logg.INFO)
 logg
 
 umap_shape_mnist = [0, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
 
-PathToDataSet = '/data/vsevolod/DmiDiplom/DataSets'
-PathToModel = '/data/vsevolod/DmiDiplom/Models/gridNN'
+PathToDataSet = ''
+PathToModel = ''
 
 NamesDataSet = ['OnlyColor.hdf5',\
                 'OnlyH.hdf5',\
@@ -206,8 +185,8 @@ NamesDataSet = ['OnlyColor.hdf5',\
 name_loss_list = ['weighted_categorical_crossentropy',\
              'dice_loss']
   
-name_NN_list = ['ezConvAutoEncoderForMnist', 'DymasUnetСircumcised',\
-             'DymasUnetWithSeparableConvСircumcised']
+name_NN_list = ['ezConvAutoEncoderForMnist', 'UnetСircumcised',\
+             'UnetWithSeparableConvСircumcised']
 
 num_layers = [6, 7]
 
@@ -277,15 +256,15 @@ for iter_loss in range(len(name_loss_list)):
 """
 NN2 
 """
-RootPathLatentSpace = '/data/vsevolod/DmiDiplom/LatentSpace2T/preceptron'
+RootPathLatentSpace = ''
 
 logg.basicConfig(filename=fs.join(RootPathLatentSpace, "LatentSpaceLogger.log"), level=logg.INFO)
 logg
 
 umap_shape_mnist = [0, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2]
 
-PathToDataSet = '/data/vsevolod/DmiDiplom/DataSets'
-PathToModel = '/data/vsevolod/DmiDiplom/Models/gridNN'
+PathToDataSet = ''
+PathToModel = ''
 
 NamesDataSet = ['OnlyColor.hdf5',\
                 'OnlyH.hdf5',\
@@ -295,8 +274,8 @@ NamesDataSet = ['OnlyColor.hdf5',\
 name_loss_list = ['weighted_categorical_crossentropy',\
              'dice_loss']
   
-name_NN_list = ['ezConvAutoEncoderForMnist', 'DymasUnetСircumcised',\
-             'DymasUnetWithSeparableConvСircumcised']
+name_NN_list = ['ezConvAutoEncoderForMnist', 'UnetСircumcised',\
+             'UnetWithSeparableConvСircumcised']
 
 num_layers = [6, 7]
 
@@ -362,12 +341,3 @@ for iter_loss in range(len(name_loss_list)):
                                                                   layer_iter)), 'w')
           ff.create_dataset('precision', precision)
           ff.close()
-
-
-NamesDataSet = ['OnlyColor.hdf5',\
-                'OnlyH.hdf5',\
-                'OnlyX.hdf5',\
-                'Only.hdf5']
-  
-i = 0
-print(NamesDataSet[i][:-5])
