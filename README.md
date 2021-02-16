@@ -11,7 +11,8 @@
 |--------------:| :-----------: |:------------------:| :----------:|
 |       R       | [42- &delta;, 42 + &delta;]  | [127- &delta;, 127+ &delta;]       | [212- &delta;, 212+ &delta;]|
 |       G       | [127- &delta;, 127 + &delta;]  | [212- &delta;, 212+ &delta;]       | [42- &delta;, 42+ &delta;]|
-|       B       | [212- &delta;, 212 + &delta;]  | [42- &delta;, 42+ &delta;]       | [127- &delta;, 127+ &delta;]|  
+|       B       | [212- &delta;, 212 + &delta;]  | [42- &delta;, 42+ &delta;]       | [127- &delta;, 127+ &delta;]|
+
 ![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithoutSelection.png?raw=true) ![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithSelection.png?raw=true)
 
 ## Результирующие Маски 
