@@ -45,7 +45,9 @@
 
 ## Построение Латентных Пространств 
 В этом разделе выполним визуализацию пространства. В силу большой размерности пространства, полная визуализация невозможно, поэтому воспользуемся алгоритмом нелинейного снижения размерности UMAP, который в сравнении с другими методами нелинейного проектирования лучше сохраняет глобальную структуру многообразий данных. А так же, для визуализации многомерных пространств воспользуемся алгоритмом линейного сжатия PCA, который выделяет главные направления (размерности) исходного пространства.  
-![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/latent_space_model_ezConvAutoEncoderForMnist_dice_losshdf5_FreeAllhdf5_umap2d.png?raw=true)
+![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/latent_space_model_ezConvAutoEncoderForMnist_dice_losshdf5_FreeAllhdf5_umap2d.png?raw=true)  
+![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/DUFreeAll.png?raw=true)  
+![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/DUSFreeAll.png?raw=true)  
 
 ## Использование Перцептрона
 
