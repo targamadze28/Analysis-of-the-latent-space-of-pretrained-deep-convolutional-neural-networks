@@ -13,8 +13,7 @@
 |       G       | [127- &delta;, 127 + &delta;]  | [212- &delta;, 212+ &delta;]       | [42- &delta;, 42+ &delta;]|
 |       B       | [212- &delta;, 212 + &delta;]  | [42- &delta;, 42+ &delta;]       | [127- &delta;, 127+ &delta;]|
 
-![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithoutSelection.png?raw=true)   
-![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithSelection.png?raw=true)
+![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithoutSelection.png?raw=true) ![alt text](https://github.com/targamadze28/Analysis-of-the-latent-space-of-pretrained-deep-convolutional-neural-networks/blob/main/ImageExampleWithSelection.png?raw=true)
 
 ## Результирующие Маски 
 В данной задаче результирующими величинами являются семантические маски, которые для определенного класса представляют собой бинарные изображение 64 х 64 х 1 и содержат ненулевые пиксели там, где исходное изображение содержит пиксели соответствующего класса.  Строго говоря, в задаче фигурируют четыре класса, а именно: три класса прямоугольников и фоновый класс, который не содержит пикселей первых трех.  
